@@ -1,0 +1,244 @@
+# yaml-language-server: $schema=./schema.json
+schemaVersion: 1
+id: consulting-dach
+version: '1.0.0'
+name: Inhabergeführte Consulting-Firmen im DACH-Raum
+description: >-
+  Übersetzt das Business-ICP-Playbook in überprüfbare Merkmale.
+  Datierte Ereignisse schlagen allgemeine Eigenschaften. Ein ehrliches C ist besser als ein erfundenes A.
+target:
+  audience: Inhaber- bzw. eigentümergeführte, spezialisierte Beratungen mit kurzen Entscheidungswegen.
+  region:
+    name: DACH
+    countries:
+      - { code: DE, name: Deutschland, defaultCity: Berlin }
+      - { code: AT, name: Österreich, defaultCity: Wien }
+      - { code: CH, name: Schweiz, defaultCity: Zürich }
+  companySize:
+    min: 8
+    max: 25
+    excludeBelow: 5
+  industries:
+    - id: strategy_management
+      name: Strategie- und Managementberatung
+      subcategories: [Markteintritt, Restrukturierung, M&A, Strategische Neuausrichtung]
+    - id: it_digital
+      name: IT- und Digitalisierungsberatung
+      subcategories: [Softwareeinführung, Cloud, Digitalisierung, Cybersecurity, Automatisierung, Technische Transformation]
+    - id: organization_operations
+      name: Organisations- und Prozessberatung / Operations
+      subcategories: [Organisation, Prozesse, Supply Chain, Produktion, Administrative Abläufe]
+discovery:
+  languageCode: de
+  # Jeder CLI-Aufruf wählt genau eine Suche; Google-Kategorien sind kein Eignungsnachweis.
+  queries:
+    - Unternehmensberatung in {city}, {country}
+    - IT- und Digitalisierungsberatung in {city}, {country}
+    - Organisations- und Prozessberatung in {city}, {country}
+facts:
+  country:
+    label: Unternehmenssitz
+    type: string
+    research: Land aus Impressum oder Register bestätigen; Suchort allein reicht nicht.
+  employeeCount:
+    label: Anzahl Mitarbeitende
+    type: number
+    research: Teamseite, Unternehmensangabe oder aktuelle belastbare Quelle; Schätzungen als inferred markieren. Bandbreiten, die eine Grenze schneiden, nicht als exakte Zahl ausgeben.
+  ownerLed:
+    label: Inhaber- bzw. eigentümergeführt
+    type: boolean
+    research: Eigentum und operative Leitung aus Über-uns-Seite oder Register belegen. Geschäftsführer-Titel allein belegt kein Eigentum.
+  industry:
+    label: Tatsächliches Geschäftsmodell
+    type: string
+    values: [strategy_management, it_digital, organization_operations, recruiting, agency, other]
+    research: Leistungen prüfen und nach überwiegendem Geschäftsmodell einordnen. Google-Kategorie Consulting ist kein Beleg.
+  consultingFocus:
+    label: Klare Spezialisierung auf Beratungsleistungen
+    type: boolean
+    research: Konkrete Beratungsleistungen auf Angebotsseiten belegen.
+  decisionMakerAccessible:
+    label: Direkter Zugang zur entscheidungsbefugten Person
+    type: boolean
+    research: Namentlich zuständige Inhaberin oder Inhaber und geschäftlichen Kontakt belegen. Optionales Personalisierungsmerkmal.
+  websiteExists:
+    label: Eigene Website vorhanden
+    type: boolean
+    research: Eigene Website und Firmenzuordnung prüfen. Ein leeres Google-Website-Feld bedeutet unbekannt, nicht false. False nur nach dokumentierter eigener Suche.
+  identityConfirmed:
+    label: Unternehmen eindeutig identifizierbar
+    type: boolean
+    research: Firmenname, Impressum und Standort abgleichen; Namensdopplungen klären.
+  active:
+    label: Unternehmen aktiv
+    type: boolean
+    research: Aktuellen Unternehmensstatus prüfen; ein alter Blog oder ein einzelner HTTP-Fehler beweist keine Inaktivität.
+  aiHiring:
+    label: Offene KI-/AI-/Automation-Stelle
+    type: boolean
+    research: Aktuelle, noch offene Stellenanzeige auf Karriereseite, LinkedIn Jobs, Stepstone oder Indeed. Stellentitel, URL und echtes Veröffentlichungsdatum erfassen; Abrufdatum nicht als eventDate verwenden.
+  aiPracticeMaturity:
+    label: Reife der eigenen KI-Praxis
+    type: string
+    values: [none, buzzwords, building, established]
+    research: >-
+      Leistungsseiten tatsächlich prüfen. none = kein konkretes KI-Angebot auf den geprüften Seiten;
+      buzzwords = nur allgemeine Begriffe; building = sichtbar im Aufbau;
+      established = belastbare eigene KI-Praxis mit konkreten Leistungen, Team oder Referenzen.
+      Fehlende Recherche ist kein Nachweis einer Lücke. Prüfungsumfang im Beleg festhalten.
+  partnerCertification:
+    label: Partnerschaft oder Zertifizierung
+    type: boolean
+    research: Microsoft, SAP, Salesforce, ISO 27001 oder TISAX als Beispiele prüfen. Status, Quelle und gegebenenfalls Datum der neuen Partnerschaft/Zertifizierung erfassen; ein undatiertes Logo ist kein neues Ereignis.
+  talkEvent:
+    label: Talk, Event oder Webinar
+    type: boolean
+    research: Konkretes Thema und tatsächliches Veranstaltungsdatum auf Veranstalter- oder Unternehmensseite belegen; eventDate ist das Eventdatum.
+  growth:
+    label: Konkretes Wachstum oder Einstellungswelle
+    type: boolean
+    research: Dokumentierte Teamvergrößerung oder mehrere aktuelle neue Stellen erfassen. Eine Teamgröße allein beweist kein Wachstum. Ereignisdatum bei belastbarer Quelle ergänzen.
+  budgetTiming:
+    label: Unternehmensspezifisches Budget-Timing
+    type: boolean
+    research: Beleg für Budgetplanung, Investitionsphase oder Frist dieses Unternehmens suchen. Jahresende allein ist keine individuelle Evidenz und kein A-Trigger.
+  regulatoryPressure:
+    label: Konkreter regulatorischer Handlungsanlass
+    type: boolean
+    research: Nur werten, wenn tatsächlicher KI-Einsatz oder entsprechende Kundenberatung und ein dazu passender konkreter Anlass belegt sind. Keine allgemeine Rechtsbehauptung als individuelle Evidenz ausgeben.
+qualification:
+  # Startwerte für Aktualität; geschäftlich anpassbar, keine Fristen aus dem Playbook.
+  maxEvidenceAgeDays: 180
+  allowedSourceTypes: [website, registry, job_board, social, news, manual]
+  required:
+    - id: region
+      label: Sitz im Zielgebiet
+      when: { fact: country, op: in, valueFrom: target.region.countries.*.code }
+    - id: team_size
+      label: Team innerhalb der Zielgröße
+      when:
+        all:
+          - { fact: employeeCount, op: gte, valueFrom: target.companySize.min }
+          - { fact: employeeCount, op: lte, valueFrom: target.companySize.max }
+    - id: ownership
+      label: Eigentümergeführt
+      when: { fact: ownerLed, op: eq, value: true }
+    - id: relevant_industry
+      label: Gewünschte Beratungsbranche
+      when: { fact: industry, op: in, valueFrom: target.industries.*.id }
+    - id: service_focus
+      label: Spezialisierte Beratungsleistungen
+      when: { fact: consultingFocus, op: eq, value: true }
+signals:
+  - id: S1
+    label: Offene KI-Stellenanzeige
+    priority: 1
+    when: { fact: aiHiring, op: eq, value: true }
+    event: { fact: aiHiring, maxPastDays: 90, maxFutureDays: 0 }
+    research: Titel, offene Stelle, Veröffentlichungsdatum und Anzeigen-URL sichern.
+    outreachHint: Auf die konkrete offene Stelle und den erkennbaren Kompetenzaufbau Bezug nehmen.
+  - id: S2
+    label: KI-Lücke im Leistungsportfolio
+    priority: 2
+    when: { fact: aiPracticeMaturity, op: in, value: [none, buzzwords, building] }
+    research: Leistungsportfolio auf konkrete KI-Angebote prüfen; Aufbau und etablierte Praxis unterscheiden.
+    outreachHint: KI-Kompetenzaufbau als Hypothese formulieren; keine Kompetenzlosigkeit unterstellen.
+  - id: S3
+    label: Partner- und Zertifizierungsstatus
+    priority: 3
+    when: { fact: partnerCertification, op: eq, value: true }
+    event: { fact: partnerCertification, maxPastDays: 90, maxFutureDays: 0 }
+    research: Status sowie Datum einer neuen Partnerschaft, Zertifizierung oder Erneuerung prüfen.
+    outreachHint: Nur belegte Partnerschaften oder tatsächlich anstehende Fristen ansprechen.
+  - id: S4
+    label: Talks, Events und Webinare
+    priority: 4
+    when: { fact: talkEvent, op: eq, value: true }
+    event: { fact: talkEvent, maxPastDays: 30, maxFutureDays: 60 }
+    research: Veranstaltungsseite, Thema und Eventdatum prüfen.
+    outreachHint: Das datierte Event als Anlass nutzen; Thema und Datum korrekt wiedergeben.
+  - id: S5
+    label: Wachstum
+    priority: 5
+    when: { fact: growth, op: eq, value: true }
+    event: { fact: growth, maxPastDays: 90, maxFutureDays: 30 }
+    research: Wachstumsankündigung oder aktuelle Hiring-Welle belegen.
+    outreachHint: Onboarding, Wissenstransfer und Skalierung nur als mögliche Bedarfe formulieren.
+  - id: S6
+    label: Budget-Timing
+    priority: 6
+    when: { fact: budgetTiming, op: eq, value: true }
+    research: Unternehmensbezogenen Budgetanlass prüfen; Timing verstärkt nur einen passenden Lead.
+    outreachHint: Eine belegte Budgetphase berücksichtigen; kein künstlicher Zeitdruck.
+  - id: S7
+    label: Regulatorischer Druck
+    priority: 7
+    when: { fact: regulatoryPressure, op: eq, value: true }
+    research: Unternehmensbezug und tatsächliche KI-Nutzung prüfen.
+    outreachHint: Nur belegte Betroffenheit ansprechen; keine pauschalen regulatorischen Drohungen.
+grading:
+  # Erste passende Regel gewinnt. Datierte Trigger haben Vorrang vor Hook-Priorität.
+  rules:
+    - grade: A
+      description: ICP bestätigt und mindestens ein konkretes, aktuelles, datiertes Kaufsignal belegt.
+      requireAllMandatory: true
+      signalIds: [S1, S3, S4, S5]
+      minMatches: 1
+      datedOnly: true
+    - grade: B
+      description: Pflichtmerkmale belegt; kein aktueller datierter A-Trigger erforderlich.
+      requireAllMandatory: true
+      signalIds: []
+      minMatches: 0
+      datedOnly: false
+  fallback: C
+  fallbackDescription: Eignung noch nicht belastbar belegt; keine individuelle Ansprache erfinden.
+exclusions:
+  - id: too_small
+    label: Zu klein
+    when: { fact: employeeCount, op: lt, valueFrom: target.companySize.excludeBelow }
+    effect: exclude
+    onUnknown: ignore
+  - id: wrong_industry
+    label: Falsche Branche
+    when: { not: { fact: industry, op: in, valueFrom: target.industries.*.id } }
+    effect: exclude
+    onUnknown: ignore
+  - id: misclassified
+    label: Fehlklassifikation – Recruiting-Firma oder Agentur
+    when: { fact: industry, op: in, value: [recruiting, agency] }
+    effect: flag
+    onUnknown: ignore
+  - id: established_practice
+    label: Belastbare, starke eigene KI-Praxis bereits etabliert
+    when: { fact: aiPracticeMaturity, op: eq, value: established }
+    effect: exclude
+    onUnknown: review
+  - id: no_website
+    label: Keine eigene Website nach eigener Recherche
+    when: { fact: websiteExists, op: eq, value: false }
+    effect: exclude
+    onUnknown: review
+  - id: unclear_identity
+    label: Unternehmen nicht eindeutig identifizierbar
+    when: { fact: identityConfirmed, op: eq, value: false }
+    effect: exclude
+    onUnknown: review
+  - id: inactive
+    label: Unternehmen offensichtlich inaktiv
+    when: { fact: active, op: eq, value: false }
+    effect: exclude
+    onUnknown: review
+enrichment:
+  eligibleGrades: [A, B]
+  tasks:
+    - Entscheidungsbefugte Inhaberin oder Inhaber und geschäftlichen Kontakt recherchieren.
+    - Stärksten belegten Anlass vertiefen, Datum und Originalquelle erneut prüfen.
+    - Konkreten Bezug zwischen Beratungsangebot, KI-Kompetenzaufbau und möglichem Bedarf ausarbeiten.
+outreach:
+  hypothesis: Eine sichtbare KI-Lücke kann für Beratungen neben Effizienz auch Glaubwürdigkeit und fachliche Anschlussfähigkeit betreffen.
+  guidelines:
+    - Hypothesen als Hypothesen kennzeichnen; keine Probleme erfinden.
+    - Konkrete datierte Ereignisse vor allgemeinen Merkmalen verwenden.
+    - Nur belegte Namen, Fakten, Termine und Quellen verwenden.
+    - Recherche vor teuren Briefen, Personalisierung und Outreach einsetzen.

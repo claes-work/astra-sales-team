@@ -1,0 +1,78 @@
+# Bewusst andere Branche, Sprache, Region, Fakten und Bewertungsregeln.
+# Dient als lauffähiges Beispiel für den Profilwechsel, nicht als recherchiertes Business-ICP.
+schemaVersion: 1
+id: manufacturing-uk
+version: '1.0.0'
+name: Beispiel – britische Industriezulieferer
+target:
+  audience: Industriezulieferer mit Modernisierungsprojekten
+  region:
+    name: Vereinigtes Königreich
+    countries:
+      - { code: GB, name: United Kingdom, defaultCity: Birmingham }
+  companySize: { min: 50, max: 250, excludeBelow: 20 }
+  industries:
+    - id: manufacturing
+      name: Industrielle Fertigung
+      subcategories: [Präzisionsteile, Komponenten]
+discovery:
+  languageCode: en
+  queries:
+    - Industrial manufacturers in {city}, {country}
+facts:
+  headquarters:
+    label: Land des Hauptsitzes
+    type: string
+    research: Hauptsitz aus Register oder eigener Website belegen.
+  workforce:
+    label: Mitarbeitende
+    type: number
+    research: Unternehmensangaben zur Beschäftigtenzahl prüfen.
+  sector:
+    label: Branche
+    type: string
+    research: Produkte und eigene Fertigung prüfen.
+  modernization:
+    label: Modernisierungsprojekt angekündigt
+    type: boolean
+    research: Konkrete Projektankündigung mit Datum und Quelle erfassen.
+qualification:
+  maxEvidenceAgeDays: 365
+  allowedSourceTypes: [website, registry, news]
+  required:
+    - id: location
+      label: Hauptsitz im Zielgebiet
+      when: { fact: headquarters, op: in, valueFrom: target.region.countries.*.code }
+    - id: size
+      label: Zielgröße
+      when:
+        all:
+          - { fact: workforce, op: gte, valueFrom: target.companySize.min }
+          - { fact: workforce, op: lte, valueFrom: target.companySize.max }
+    - id: business
+      label: Zielbranche
+      when: { fact: sector, op: in, valueFrom: target.industries.*.id }
+signals:
+  - id: investment
+    label: Modernisierung
+    priority: 1
+    when: { fact: modernization, op: eq, value: true }
+    event: { fact: modernization, maxPastDays: 180, maxFutureDays: 0 }
+    research: Neue Projektankündigung prüfen.
+grading:
+  rules:
+    - { grade: A, description: Modernisierungsprojekt angekündigt., requireAllMandatory: true, signalIds: [investment], minMatches: 1, datedOnly: true }
+    - { grade: B, description: Unternehmensmerkmale passen., requireAllMandatory: true, signalIds: [], minMatches: 0, datedOnly: false }
+  fallback: C
+  fallbackDescription: Belege fehlen.
+exclusions:
+  - id: tiny
+    label: Zu klein
+    when: { fact: workforce, op: lt, valueFrom: target.companySize.excludeBelow }
+    effect: exclude
+    onUnknown: ignore
+enrichment:
+  # Dieses Beispiel gibt bewusst nur A-Leads für Enrichment frei.
+  eligibleGrades: [A]
+  tasks:
+    - Verantwortliche Person für das Modernisierungsprojekt recherchieren.

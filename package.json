@@ -1,0 +1,39 @@
+{
+  "name": "astra-sales-team",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "outreach": "node src/outreach/cli.mjs",
+    "outreach:check": "node src/outreach/cli.mjs check",
+    "outreach:init": "node src/outreach/cli.mjs init",
+    "outreach:demo": "node src/outreach/cli.mjs demo --out research/outreach-demo.md",
+    "sales:api": "node src/outreach/cli.mjs api",
+    "start": "node scripts/start-demo.mjs",
+    "places:check": "node src/places.mjs check",
+    "places:test": "node src/places.mjs smoke",
+    "places:search": "node src/places.mjs search",
+    "icp:check": "node src/leads.mjs check",
+    "leads:plan": "node src/leads.mjs plan",
+    "leads:qualify": "node src/leads.mjs qualify",
+    "leads:research": "node src/leads.mjs research",
+    "db:prepare": "node src/storage.mjs",
+    "test": "node --test tests/*.test.mjs apps/dashboard/tests/*.test.mjs",
+    "demo:api": "node scripts/demo-api.mjs",
+    "db:init": "node scripts/init-appwrite.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "imapflow": "2.0.0",
+    "mailparser": "3.9.24",
+    "yaml": "2.9.0"
+  },
+  "description": "Profilgesteuerte Lead-Recherche, kontrollierter Outreach und Sales-Dashboard",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claes-work/astra-sales-team.git"
+  }
+}

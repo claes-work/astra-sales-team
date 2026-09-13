@@ -1,0 +1,50 @@
+# Vollständig erfundenes Schema-Beispiel. Keine reale Firma, Person oder Versandfreigabe.
+schemaVersion: 1
+key: fictional-process-consulting
+version: '1'
+name: Fiktive Prozessberatung Alpha – Dokumentationsworkshop
+strategy: { key: consulting-gespraech, version: '1' }
+experiment: { key: geschaeftsthema-gegen-frage, version: '1' }
+assessmentId: demo-assessment-alpha
+contactId: demo-contact-alpha
+recipientName: Fiktive Beispielperson Alpha
+recipientSourceUrl: https://process-consulting.example/team
+salutation: Guten Tag Beispielperson Alpha,
+observation:
+  text: Die erfundene Prozessberatung Alpha bietet Workshops zur gemeinsamen Dokumentation von Arbeitsabläufen an.
+  evidenceIds: [demo-evidence-alpha]
+relevance: Eine mögliche Gesprächsfrage ist, wie geprüfte Workshopnotizen später leichter wiedergefunden werden können.
+body: |-
+  Guten Tag Beispielperson Alpha,
+
+  in diesem erfundenen Beispiel dokumentiert Ihr Team gemeinsam mit Kunden deren Arbeitsabläufe. Wie finden die Beteiligten nach einem Workshop die freigegebenen Notizen wieder?
+
+  In einem kostenlosen Gespräch könnten wir gemeinsam prüfen, ob eine quellenbasierte Suche dafür nützlich wäre. Ein Ergebnis könnte auch sein, dass die vorhandene Ablage bereits genügt.
+
+  Möchten Sie diese Frage in einem kurzen Gespräch besprechen?
+
+  Freundliche Grüße
+  Fiktives Beratungsteam
+question: Wie finden die Beteiligten nach einem Workshop die freigegebenen Notizen wieder?
+action:
+  kind: reply
+  text: Möchten Sie diese Frage in einem kurzen Gespräch besprechen?
+  url: ''
+hypothesis:
+  status: unconfirmed
+  text: Quellenbasierte Suche könnte für Workshopnotizen nützlich sein; ein tatsächlicher Bedarf ist nicht belegt.
+authorship:
+  author: Fiktiver Beispielautor
+  methodVersion: fictional-example-v1
+  model: null
+subjects:
+  a: Workshopnotizen bei der fiktiven Prozessberatung Alpha
+  b: Wie werden freigegebene Workshopnotizen wiedergefunden?
+checkedAt: '2026-09-10T12:00:00Z'
+review:
+  status: pending
+  by: ''
+  checkedAt: ''
+  checks: []
+  note: Erfundenes Lernbeispiel; vor jeder realen Verwendung eigenständig recherchieren und prüfen.
+  approvedContentHash: ''

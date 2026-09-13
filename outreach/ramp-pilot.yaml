@@ -1,0 +1,15 @@
+schemaVersion: 1
+version: '1'
+domain: example.invalid
+timezone: Europe/Berlin
+target: 100
+startLimit: 5
+increment: 5
+minHealthySendDays: 3
+minDeliveredPerDay: 5
+observationHours: 48
+maxSyncAgeHours: 24
+idleResetDays: 10
+reductionFactor: 0.5
+# Konservative eigene Pilotannahmen, keine wissenschaftlich sicheren Schwellen.
+# Erhöhen nur nach belegten Sendetagen, Zustellungen, aktuellem Abgleich und Review.

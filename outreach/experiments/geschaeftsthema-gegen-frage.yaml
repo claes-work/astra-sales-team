@@ -1,0 +1,22 @@
+# Arbeitsfassung. Kein Body-Template: vollständige Texte werden pro Firma importiert.
+schemaVersion: 2
+key: geschaeftsthema-gegen-frage
+version: '1'
+name: Geschäftsgegenstand oder konkrete Frage im Betreff
+authoring: individual
+strategy:
+  key: consulting-gespraech
+  version: '1'
+hypothesis: Zwei konsistente Betreffansätze bei je Firma gleichem individuellen Body vergleichen. Der gesamte Ansatz wird getestet, nicht allein das Fragezeichen oder das KI-Wort.
+variable: subject
+enrollmentWindow:
+  startsAt: '2026-09-11T07:00:00Z'
+  endsAt: '2026-09-25T15:00:00Z'
+responseWindowDays: 10
+variants:
+  - id: a
+    name: Geschäftsthema
+    subjectMethod: Den belegten konkreten Geschäftsgegenstand der Firma knapp benennen, gegebenenfalls mit dem passenden KI-Bezug.
+  - id: b
+    name: Konkrete Frage
+    subjectMethod: Zum selben Gegenstand eine konkrete offene KI-Anwendungsfrage formulieren, deren Nutzen der individuelle Body erklärt.

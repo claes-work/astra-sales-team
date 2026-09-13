@@ -1,0 +1,59 @@
+# Vollständig erfundenes Schema-Beispiel ohne bestätigten Kontakt.
+schemaVersion: 1
+key: fictional-knowledge-consulting
+version: '1'
+name: Fiktive Wissensberatung Beta – Lernmaterialien
+strategy: { key: consulting-gespraech, version: '1' }
+experiment: { key: geschaeftsthema-gegen-frage, version: '1' }
+assessmentId: demo-assessment-beta
+contactId: null
+recipientName: Fiktives Beispielteam Beta
+recipientSourceUrl: https://knowledge-consulting.example/team
+salutation: Guten Tag Beispielteam Beta,
+observation:
+  text: Die erfundene Wissensberatung Beta stellt nach Trainings eine Sammlung von Lernmaterialien zusammen.
+  evidenceIds: [demo-evidence-beta]
+supplementalEvidence:
+  - id: demo-supplement-beta
+    sourceUrl: https://knowledge-consulting.example/training
+    sourceQuote: Erfundenes Szenario für dieses Repository, zusammengefasst als Lernmaterialsammlung nach Trainings.
+    observedAt: '2026-09-10T12:00:00Z'
+    checkedBy: Fiktiver Beispielautor
+    excerptKind: summary
+relevance: Die spätere Auswahl passender Übungen bietet eine mögliche Frage für ein unverbindliches Gespräch.
+body: |-
+  Guten Tag Beispielteam Beta,
+
+  welche Übungen aus einem Training werden im Arbeitsalltag später tatsächlich verwendet?
+
+  Für Ihre erfundene Lernmaterialsammlung wäre das ein möglicher Ausgangspunkt, um den Nutzen einer unterstützten Auswahl zu prüfen. Ob dafür KI oder eine einfache Inhaltsübersicht besser passt, bleibt offen.
+
+  Gern könnten wir in einem kostenlosen Gespräch einen kleinen, prüfbaren nächsten Schritt gemeinsam festlegen.
+
+  Wäre ein Gespräch zur Auswahl hilfreicher Lernmaterialien interessant?
+
+  Freundliche Grüße
+  Fiktives Beratungsteam
+question: Welche Übungen aus einem Training werden später tatsächlich verwendet?
+action:
+  kind: reply
+  text: Wäre ein Gespräch zur Auswahl hilfreicher Lernmaterialien interessant?
+  url: ''
+hypothesis:
+  status: unconfirmed
+  text: Eine unterstützte Auswahl könnte helfen; tatsächliche Abläufe und Bedarf sind unbekannt.
+authorship:
+  author: Fiktiver Beispielautor
+  methodVersion: fictional-example-v1
+  model: null
+subjects:
+  a: Lernmaterialien der fiktiven Wissensberatung Beta
+  b: Welche Trainingsübungen helfen später im Alltag?
+checkedAt: '2026-09-10T12:00:00Z'
+review:
+  status: pending
+  by: ''
+  checkedAt: ''
+  checks: []
+  note: Erfundenes Lernbeispiel ohne recherchierte Person, Adresse oder Kontaktfreigabe.
+  approvedContentHash: ''

@@ -1,0 +1,32 @@
+# syntax=docker/dockerfile:1
+# Pinned digest verified locally on 2026-09-12; update deliberately with tests.
+FROM node:22-bookworm-slim@sha256:83f487e0a63425e5b4d146fb5e5be574bcbe1b7b843d3ebafdd95eaf7767a7e5 AS dependencies
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund
+
+FROM node:22-bookworm-slim@sha256:83f487e0a63425e5b4d146fb5e5be574bcbe1b7b843d3ebafdd95eaf7767a7e5 AS runtime
+WORKDIR /app
+# util-linux (including flock) is already in the pinned Debian base. Fail the
+# build if a future base change removes it instead of running without locks.
+RUN command -v flock && test "$(id -u node)" = "1000" \
+    && install -d -o node -g node -m 0700 /data/outreach-locks /data/event-sync
+ENV NODE_ENV=production \
+    APPWRITE_TRANSPORT=rest \
+    OUTREACH_API_HOST=0.0.0.0 \
+    OUTREACH_SEND_ENABLED=false \
+    OUTREACH_LOCK_MODE=flock \
+    OUTREACH_LOCK_DIR=/data/outreach-locks \
+    OUTREACH_EVENT_SYNC_STATE_DIR=/data/event-sync
+COPY --from=dependencies --chown=root:root /app/node_modules ./node_modules
+COPY --chown=root:root package.json package-lock.json ./
+COPY --chown=root:root src/outreach/ ./src/outreach/
+COPY --chown=root:root src/operations/ ./src/operations/
+COPY --chown=root:root src/integrations/ ./src/integrations/
+COPY --chown=root:root infra/appwrite/schema.mjs infra/appwrite/outreach-schema.mjs infra/appwrite/website-quiz-schema.mjs ./infra/appwrite/
+COPY --chown=root:root infra/production/api-health.mjs ./infra/production/api-health.mjs
+# Code is deliberately not writable by the runtime user.
+USER 1000:1000
+EXPOSE 8787
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 CMD ["node", "infra/production/api-health.mjs"]
+CMD ["node", "src/outreach/cli.mjs", "api"]

@@ -1,0 +1,46 @@
+# Arbeitsfassung. Redaktionelle Empfehlung, keine freigegebene Versandstrategie.
+schemaVersion: 1
+key: consulting-gespraech
+version: '1'
+name: Individuelle Geschäftsbeobachtung zum kostenlosen Gespräch
+readiness: draft
+hypothesis: Ein belegter geschäftlicher Bezug und eine konkrete offene Frage machen das kostenlose Gespräch für passende Beratungen relevant. Das ist eine zu prüfende Hypothese.
+objective: Qualifizierte Gespräche, in denen das Unternehmen seinen KI-Einsatz und einen hilfreichen nächsten Schritt gemeinsam mit uns klärt.
+primaryMetric: qualified_meeting_rate
+freeBenefit: Eine konkrete Empfehlung für den nächsten sinnvollen KI-Schritt, die unabhängig von einer späteren Zusammenarbeit genutzt werden kann.
+tone: Förmlich, direkt, menschlich und konkret. Keine Floskeln, künstliches Lob oder Verkaufspsychologie. Rund 60 bis 100 Wörter sind eine weiche Orientierung, kein Pflichtumfang.
+salutationRule: Anrede mit recherchiertem Nachnamen; Titel und Anrede prüfen. Keine Namen oder Geschlechter aus unzureichenden Informationen ergänzen.
+contentFunctions:
+  - Mit einer belegten geschäftlich relevanten Beobachtung oder einer daraus entstehenden Frage einsteigen.
+  - Die mögliche Bedeutung für die Firma erläutern und Beobachtung von Hypothese unterscheiden.
+  - Den eigenständigen Nutzen eines kostenlosen Gesprächs vermitteln.
+  - Eine passende nächste Handlung anbieten. Reihenfolge und Absätze dürfen je Firma variieren.
+research:
+  requireCompletedEnrichment: true
+  maxEvidenceAgeDays: 90
+  rules:
+    - Erst ICP-Qualifizierung, dann Anreicherung, danach individuelle redaktionelle Vorbereitung.
+    - Geschäftlicher Gegenstand statt privater Nebensächlichkeit oder bloßer Namensersetzung.
+    - Beobachtung durch firmeneigene oder anderweitig belastbare Quelle mit Prüfdatum belegen.
+    - Bei fehlendem relevantem Beleg nachrecherchieren oder zurückstellen. Keine Defizite aus einer fehlenden Website-Aussage ableiten.
+boundaries:
+  - Keine erfundene interne KI-Nutzung, Lücke, Zeitersparnis, Kaufabsicht oder exakte Roadmap-Stufe.
+  - Kein vorgetäuschter Vorkontakt und kein Betreff, der wie eine bestehende Kundenanfrage täuscht.
+  - Workshops sind das bezahlte Kernangebot. Die Erstmail bietet das kostenlose nützliche Gespräch.
+  - Stufennamen gehören nicht in die Mail und blockieren deren Vorbereitung nicht.
+  - 30 Minuten bleiben ein Vorschlag. Ein schriftliches Ergebnis und eine bestimmte Dauer sind noch kein zugesagter Lieferstandard.
+  - Vollständige geschäftliche Signatur und erfüllbare Aussagen vor Versand prüfen.
+preferredAction: reply
+humanChecks:
+  - id: relevant-observation
+    instruction: Ist der Einstieg individuell, geschäftlich relevant und durch die angegebenen Quellen gedeckt?
+  - id: fact-vs-hypothesis
+    instruction: Sind Fakten und mögliche Anwendungsfälle sauber getrennt, ohne erfundene Stufe, Defizite oder Resultate?
+  - id: subject-methods
+    instruction: Folgen beide Kandidaten den festgelegten Betreffmethoden, passen zum selben Body und täuschen keine bestehende Beziehung vor?
+  - id: benefit-and-action
+    instruction: Trägt der individuelle Text die strategischen Funktionen, den kostenlosen eigenständigen Nutzen und genau eine Hauptaktion?
+  - id: recipient-and-signature
+    instruction: Sind recherchierte Person, Anrede, vollständige Signatur und tatsächlicher Ansprechpartner korrekt?
+  - id: deliverable
+    instruction: Sind alle Leistungszusagen einschließlich einer eventuell genannten Dauer tatsächlich lieferbar und beschlossen?

@@ -1,0 +1,27 @@
+# Feste Software-Testvorlage. Unabhängig von Änderungen am echten Pilotentwurf.
+schemaVersion: 1
+key: roadmap-subject-pilot
+version: '1'
+name: Roadmap – erster Betreffvergleich
+variable: subject
+landingUrl: https://example.invalid/sales-roadmap
+responseWindowDays: 7
+variants:
+  - id: a
+    subject: 'KI-Weiterentwicklung bei {{company}}'
+  - id: b
+    subject: 'Welcher KI-Schritt hilft {{company}} als Nächstes?'
+body: |-
+  Guten Tag,
+
+  wir unterstützen Unternehmen mit Workshops dabei, KI passend zu ihrem aktuellen Stand einzusetzen und sich weiterzuentwickeln.
+
+  Unsere kostenlose AI-Scaling-Roadmap hilft bei der Einordnung und zeigt mögliche nächste Schritte:
+  {{landingUrl}}
+
+  Wenn das für {{company}} gerade relevant ist, freue ich mich über eine kurze Rückmeldung.
+
+  Freundliche Grüße
+  {{senderName}}
+
+  Falls Sie keine weiteren Nachrichten wünschen, genügt eine kurze Antwort.

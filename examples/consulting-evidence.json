@@ -1,0 +1,29 @@
+{
+  "leads": [
+    {
+      "id": "fictional-consulting-a",
+      "name": "Fiktive Beispielberatung – keine echte Firma",
+      "website": "https://consulting.example",
+      "evidence": [
+        { "fact": "country", "value": "DE", "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "website", "url": "https://consulting.example/impressum", "quote": "Fiktiver Beleg: Sitz in Deutschland." } },
+        { "fact": "employeeCount", "value": 15, "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "website", "url": "https://consulting.example/team", "quote": "Fiktiver Beleg: Unser Team besteht aus 15 Mitarbeitenden." } },
+        { "fact": "ownerLed", "value": true, "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "website", "url": "https://consulting.example/ueber-uns", "quote": "Fiktiver Beleg: Inhabergeführt; die beiden Eigentümer leiten das Unternehmen." } },
+        { "fact": "industry", "value": "it_digital", "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "website", "url": "https://consulting.example/leistungen", "quote": "Fiktiver Beleg: IT- und Digitalisierungsberatung." } },
+        { "fact": "consultingFocus", "value": true, "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "website", "url": "https://consulting.example/leistungen", "quote": "Fiktiver Beleg: Spezialisierte Beratung für Cloud-Transformation und Softwareeinführung." } },
+        { "fact": "websiteExists", "value": true, "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "website", "url": "https://consulting.example/impressum", "quote": "Fiktiver Beleg: Eigene Website mit passendem Impressum erreichbar." } },
+        { "fact": "identityConfirmed", "value": true, "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "registry", "url": "https://register.example/company-a", "quote": "Fiktiver Beleg: Firmenname und Adresse stimmen mit Impressum überein." } },
+        { "fact": "active", "value": true, "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "registry", "url": "https://register.example/company-a", "quote": "Fiktiver Beleg: Aktiver Unternehmensstatus." } },
+        { "fact": "aiPracticeMaturity", "value": "building", "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "website", "url": "https://consulting.example/leistungen", "quote": "Fiktiver Beleg: KI-Praxis laut Leistungsseite erst im Aufbau; Leistungsübersicht und Unterseiten geprüft." } },
+        { "fact": "aiHiring", "value": true, "confidence": "confirmed", "observedAt": "2026-09-10", "eventDate": "2026-09-01", "source": { "type": "job_board", "url": "https://jobs.example/ai-consultant", "quote": "Fiktiver Beleg: AI Consultant gesucht; veröffentlicht am 01.09.2026, Stelle am Prüftag noch offen." } }
+      ]
+    },
+    { "id": "fictional-unresearched", "name": "Fiktiver Kandidat ohne Belege", "evidence": [] },
+    {
+      "id": "fictional-misclassified",
+      "name": "Fiktive Recruiting-Firma",
+      "evidence": [
+        { "fact": "industry", "value": "recruiting", "confidence": "confirmed", "observedAt": "2026-09-10", "source": { "type": "website", "url": "https://recruiting.example/leistungen", "quote": "Fiktiver Beleg: Personalvermittlung ist das einzige Geschäftsmodell." } }
+      ]
+    }
+  ]
+}

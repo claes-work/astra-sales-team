@@ -1,0 +1,32 @@
+# Backend production context: allowlisted code/manifests only.
+# The dashboard has its own context and ignore file under apps/dashboard.
+**
+!package.json
+!package-lock.json
+!src/
+!src/outreach/
+!src/outreach/*.mjs
+!src/operations/
+!src/operations/*.mjs
+!src/integrations/
+!src/integrations/*.mjs
+!infra/
+!infra/appwrite/
+!infra/appwrite/schema.mjs
+!infra/appwrite/outreach-schema.mjs
+!infra/appwrite/website-quiz-schema.mjs
+!infra/production/
+!infra/production/Dockerfile.api
+!infra/production/api-health.mjs
+
+# Defense in depth if a source folder later receives local artifacts.
+**/.env*
+**/*secret*
+**/*credential*
+**/*.log
+**/node_modules/**
+**/.local/**
+**/research/**
+**/wiki/**
+**/.git/**
+**/.secrets/**
