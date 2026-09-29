@@ -16,7 +16,7 @@ export function loadKey() {
     }
   }
   const key = process.env.GOOGLE_PLACES_API_KEY?.trim();
-  if (!key) throw new Error('GOOGLE_PLACES_API_KEY fehlt. In D:\\Dev\\sales-team-v2\\.env.local hinter GOOGLE_PLACES_API_KEY= eintragen.');
+  if (!key) throw new Error('GOOGLE_PLACES_API_KEY fehlt. Wert in .env.local im Projektstammverzeichnis eintragen oder als Prozessvariable setzen.');
   if (!/^[A-Za-z0-9_-]+$/.test(key)) throw new Error('Schlüsselformat ungültig. Den vollständigen API-Schlüssel ohne Leerzeichen eintragen.');
   return key;
 }

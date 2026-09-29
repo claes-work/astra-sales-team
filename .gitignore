@@ -11,6 +11,8 @@
 secrets/
 credentials/
 wiki/
+# Internal agent and operations notes, not part of the publication.
+CLAUDE.md
 raw/
 research/
 backups/
